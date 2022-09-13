@@ -10,7 +10,7 @@ class TestViews(TestCase):
     def test_catalog_get(self):
         response = self.client.get(self.katalog_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'katalog/katalog.html')
+        self.assertTemplateUsed(response, 'katalog.html')
 
 # Reference
 # https://www.youtube.com/watch?v=hA_VxnxCHbo
