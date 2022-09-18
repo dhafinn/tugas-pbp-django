@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Wah, kamu masih sedikit menonton!</h2>
+
+
+<table border="1" width="100%">
+    <tr>
+    <th>Watched</th>
+    <th>Title </th>
+    <th>Rating</th>
+    <th>Release Date</th>
+    <th>Review</th>
+    </tr>
+    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    {% for movie in list_movie %}
+    <tr>
+        <th>{{movie.watched}}</th>
+        <th>{{movie.title}}</th>
+        <th>{{movie.rating}}</th>
+        <th>{{movie.release_date}}</th>
+        <th>{{movie.review}}</th>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}

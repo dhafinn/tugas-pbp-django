@@ -3,7 +3,7 @@
         "model": "mywatchlist.mywatchlist",
         "pk": 1,
         "fields": {
-            "watched" : false,
+            "watched" : true,
             "title" : "NOPE",
             "rating" : 4,
             "release_date" : "2022-09-17",
@@ -25,7 +25,7 @@
         "model": "mywatchlist.mywatchlist",
         "pk": 3,
         "fields": {
-            "watched" : false,
+            "watched" : true,
             "title" : "Pulp Fiction",
             "rating" : 4.4,
             "release_date" : "1994-10-14",
@@ -36,7 +36,7 @@
         "model": "mywatchlist.mywatchlist",
         "pk": 4,
         "fields": {
-            "watched" : false,
+            "watched" : true,
             "title" : "Forrest Gump",
             "rating" : 4.4,
             "release_date" : "1994-07-06",
@@ -72,7 +72,7 @@
         "model": "mywatchlist.mywatchlist",
         "pk": 7,
         "fields": {
-            "watched" : false,
+            "watched" : true,
             "title" : "Parasite",
             "rating" : 4.2,
             "release_date" : "2019-06-21",

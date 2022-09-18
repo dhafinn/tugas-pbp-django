@@ -5,11 +5,16 @@ from django.core import serializers
 # Create your views here.
 
 def show_movie (request):
+    watched_count = MyWatchList.objects.all().filter(watched = True).count()
+    unwatched_count = MyWatchList.objects.all().filter(watched = False).count()
     data_movie = MyWatchList.objects.all()
     context = {
         'list_movie': data_movie
     }
-    return render(request, "mywatchlist.html", context)
+    if (watched_count > unwatched_count):
+        return render(request, "mywatchlistdone.html", context)
+    else:
+        return render(request, "mywatchlistundone.html", context)
 
 def show_xml(request):
     data = MyWatchList.objects.all()
