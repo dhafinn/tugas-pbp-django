@@ -1,0 +1,118 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "watched" : false,
+            "title" : "NOPE",
+            "rating" : 4,
+            "release_date" : "2022-09-17",
+            "review" : "Admirable for its originality and ambition even when its reach exceeds its grasp, Nope adds Spielbergian spectacle to Jordan Peele's growing arsenal."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {
+            "watched" : true,
+            "title" : "The Godfather Part 2",
+            "rating" : 4.5,
+            "release_date" : "1974-12-20",
+            "review" : "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "watched" : false,
+            "title" : "Pulp Fiction",
+            "rating" : 4.4,
+            "release_date" : "1994-10-14",
+            "review" : "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields": {
+            "watched" : false,
+            "title" : "Forrest Gump",
+            "rating" : 4.4,
+            "release_date" : "1994-07-06",
+            "review" : "Forrest Gump is one of the best movies of all time, guaranteed. It has such a special place in my heart. The performances are just so unforgettable and never get out of your head."
+        }
+
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields": {
+            "watched" : true,
+            "title" : "Inception",
+            "rating" : 4.4,
+            "release_date" : "2010-07-16",
+            "review" : "Christopher Nolan's Inception (2010) is a complex science fiction thriller about a group of people with varying specific skills that create a perfect team of dream-sharers."
+        }
+
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields": {
+            "watched" : true,
+            "title" : "Se7en",
+            "rating" : 4.3,
+            "release_date" : "1995-09-22",
+            "review" : "Gothic, shocking, suspenseful, disturbing and clever, `Seven' marked a new beginning for director David Fincher's career."
+        }
+
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 7,
+        "fields": {
+            "watched" : false,
+            "title" : "Parasite",
+            "rating" : 4.2,
+            "release_date" : "2019-06-21",
+            "review" : "This movie is a masterpiece. It will make you belly laugh, it will chill you to the bone, and it will make you shed a tear."
+        }
+
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 8,
+        "fields": {
+            "watched" : false,
+            "title" : "Memento",
+            "rating" : 4.2,
+            "release_date" : "2001-03-16",
+            "review" : "Christopher Nolan's 'Memento' is truly a rare and exceptional achievement in modern filmmaking in that it manages to be new, fresh, hip, and exciting without ever tiring its audience out"
+        }
+
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields": {
+            "watched" : false,
+            "title" : "The Sixth Sense",
+            "rating" : 4.1,
+            "release_date" : "1999-08-06",
+            "review" : "The Sixth Sense is a brilliant film, plain and simple. It is unique in that it relies on imagination and psychology to scare you and make you think twice about the world around you."
+        }
+
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields": {
+            "watched" : false,
+            "title" : "The Truman Show",
+            "rating" : 4.1,
+            "release_date" : "1998-10-31",
+            "review" : "An unassuming film that is thought provoking on so many levels, well acted and thoroughly enjoyable however you come to it"
+        }
+    }
+]
