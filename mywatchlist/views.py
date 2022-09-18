@@ -9,7 +9,6 @@ def show_movie (request):
     context = {
         'list_movie': data_movie
     }
-    print(data_movie)
     return render(request, "mywatchlist.html", context)
 
 def show_xml(request):
@@ -20,7 +19,4 @@ def show_json(request):
     data = MyWatchList.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-def show_html(request):
-    data = MyWatchList.objects.all()
-    return HttpResponse(serializers.serialize("html", data), content_type="application/html")
 
