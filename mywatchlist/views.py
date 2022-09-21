@@ -8,13 +8,18 @@ def show_movie (request):
     watched_count = MyWatchList.objects.all().filter(watched = True).count()
     unwatched_count = MyWatchList.objects.all().filter(watched = False).count()
     data_movie = MyWatchList.objects.all()
-    context = {
-        'list_movie': data_movie
-    }
     if (watched_count > unwatched_count):
-        return render(request, "mywatchlistdone.html", context)
+        pesan = "Selamat, kamu sudah banyak menonton!"
     else:
-        return render(request, "mywatchlistundone.html", context)
+        pesan = "Wah, kamu masih sedikit menonton!"
+    context = {
+        'list_movie': data_movie,
+        'name' : "Dhafin Raditya Juliawan",
+        'NPM' : "2106650304",
+        'pesan' : pesan
+    }
+    return render(request, "mywatchlist.html", context)
+    
 
 def show_xml(request):
     data = MyWatchList.objects.all()
