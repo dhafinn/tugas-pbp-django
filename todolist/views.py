@@ -18,6 +18,24 @@ def show_todolist(request):
     }
     return render(request, "todolist.html", context)
 
+@login_required(login_url='/todolist/login/')
+def upload(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = TaskUpload(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            description = form.cleaned_data["description"]
+            Task.objects.create(title=title, description=description, date=datetime.datetime.now(), user=request.user)
+            return redirect('todolist:show_todolist')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = TaskUpload()
+
+    return render(request, 'forms.html', {'form': form})
 
 def register(request):
     form = UserCreationForm()
@@ -53,22 +71,15 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-@login_required(login_url='/todolist/login/')
-def upload(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = TaskUpload(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            title = form.cleaned_data["title"]
-            description = form.cleaned_data["description"]
-            Task.objects.create(title=title, description=description, date=datetime.datetime.now(), user=request.user)
-            return redirect('todolist:show_todolist')
+def update_data(request, id):
+    todo = Task.objects.get(id = id)
+    todo.is_finished = not(todo.is_finished)
+    todo.save()
+    return redirect('todolist:show_todolist')
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = TaskUpload()
+def delete_data(request, id):
+    todo = Task.objects.get(id = id)
+    todo.delete()
+    return redirect('todolist:show_todolist')
 
-    return render(request, 'forms.html', {'form': form})
  
