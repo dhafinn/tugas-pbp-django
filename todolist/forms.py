@@ -1,6 +1,5 @@
-import datetime
 from django import forms
-from .models import Task
+
 
 # Tie the information here with the models class we've made
 class TaskUpload(forms.Form):
