@@ -12,15 +12,9 @@ Pertama user akan memencet button yang sudah di link dengan suatu function pada 
 
 ## Pengerjaan Checklist
 * Pertama-tama buat aplikasi baru pada django kemudian masukkan nama apps pada settings.py project_django. Kemudian add path baru pada urls.py project_django agar bisa mengakses http://localhost:8000/todolist.
-<br>
 * Membuat model yang bernama Task dan attribute yang sesuai dengan yang diminta oleh soal.
-<br>
 * Mengimplementasikan form registrasi, login, logout dengan cara memanfaatkan form dan menyimpan hasilnya.
-<br>
 * Membuat templates untuk menampilkan todolist dan menambahkan berbagai kebutuhan yang diminta oleh soal.
-<br>
 * Membuat forms.py untuk mengambil data mengenai penambahan task user dan menampilkannya pada user dengan bantuan function pada views.
-<br>
 * Menambahkan urlpatterns baru pada urls.py untuk setiap function yang dibuat.
-<br>
 * Melakukan deployment ke heroku dan menambahkan 2 akun pengguna dan 3 model task.
