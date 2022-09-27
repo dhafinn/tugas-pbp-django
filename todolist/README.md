@@ -17,4 +17,6 @@ Pertama user akan memencet button yang sudah di link dengan suatu function pada 
 * Membuat templates untuk menampilkan todolist dan menambahkan berbagai kebutuhan yang diminta oleh soal.
 * Membuat forms.py untuk mengambil data mengenai penambahan task user dan menampilkannya pada user dengan bantuan function pada views.
 * Menambahkan urlpatterns baru pada urls.py untuk setiap function yang dibuat.
-* Melakukan deployment ke heroku dan menambahkan 2 akun pengguna dan 3 model task.
+* Melakukan deployment ke heroku dan menambahkan 2 akun pengguna dan 3 model task.<br>
+Akun 1: username = inidummy, password = gokillll <br>
+Akun 2: username = inidummy2, password = kerennnn
