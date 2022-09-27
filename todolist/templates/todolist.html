@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
+{% block meta %}
+<title>To Do List</title>
+{% endblock meta %}
+
+
+
  {% block content %}
 
   
   <h1>Tugas 4 Assignment PBP/PBD</h1>
 
   {% if user.is_authenticated %}
-    <h4>Welcome, {{ user.get_username }}. Thanks for logging in.</h4>
+    <h2>Welcome, {{ user.get_username }}. Thanks for logging in.</h2>
   
   <button><a href="{% url 'todolist:upload' %}">Tambah Task Baru</a></button>
   <table border="1" width = '100%'>
