@@ -71,12 +71,14 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+@login_required(login_url='/todolist/login/')
 def update_data(request, id):
     todo = Task.objects.get(id = id)
     todo.is_finished = not(todo.is_finished)
     todo.save()
     return redirect('todolist:show_todolist')
 
+@login_required(login_url='/todolist/login/')
 def delete_data(request, id):
     todo = Task.objects.get(id = id)
     todo.delete()
