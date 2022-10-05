@@ -6,40 +6,53 @@
 
 {% block content %}
 
-<div class = "login">
+<div class="flex flex-col h-screen justify-center bg-gradient-to-r from-indigo-700 via-purple-900 to-blue-900 backdrop-blur-xl bg-white/30">
 
-    <h1>Login</h1>
+    <div class="flex justify-center">
+        <div class = "login text-sm text-gray-200 bg-white shadow-md border border-gray-200 rounded-lg max-w-sm p-4 sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">	  
+            <h1 class="text-xl font-semibold text-center">LOGIN</h1>
+        <div class="mb-2"></div>
+        
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
+        <div class="flex flex-col gap-2">
+            <div class="flex gap-20">
+                <div class="flex flex-col justify-around gap-2 w-full">
+                    <div class="flex flex-col text-sm font-medium block mb-2 justify-around text-gray-200">
+                        <p>Username:</p>
+                        <input type="text" name="username" class="form-control rounded-lg text-black">
+                    </div>
+                    <div class="flex flex-col text-sm font-medium block mb-2 justify-around text-gray-200">
+                        <p>Password:</p>
+                        <input type="password" name="password" class="form-control rounded-lg text-black">
+                    </div>
+        
+            
+                
+                    <input class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit" value="Login">
+                </div>
+            </div>
+        </div>
     </form>
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
 
+    {% if messages %}
+        <div class="mt-4">
+
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}     
+        
+        <div class="mt-4">
+            <p class="text-s">Belum mempunyai akun? <span><a href="{% url 'todolist:register' %}" class="text-blue-700 hover:underline dark:text-blue-500 mt-4">Buat Akun</a><span></p>
+        </div>
+        </div>
+    </div>   
 </div>
 
 {% endblock content %}
