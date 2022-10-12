@@ -1,4 +1,5 @@
 # Assignment 4 
+[Link Deploy](https://tugas-pbp-dhafin.herokuapp.com/todolist)
 
 ## Apa itu CSRF Token dan mengapa penting pada form
 CSRF adalah cross-site request forgery. Sesuai dengan namanya, CSRF adalah salah satu cara metode penyerangan yang dilakukan oleh sites yang berbahaya. Kadang kali, kita menginput data credential ke sebuah website yang kita percayai. Browser kita menyimpan cookies dari website yang kita kunjungi tersebut. Kemudian, kita mengunjungi website berbahaya dimana terdapat request berbahaya untuk mengambil data credential dari user. Selanjutnya karena web penyimpan data nya hanya memerlukan cookie session yang tersimpan pada browser user, maka web tersebut tidak bisa membedakan dan mengira bahwa request tadi adalah request sungguhan. Oleh karna itu, Django menyediakan **CSRF Token** yang merupakan kode rahasia acak yang unik untuk setiap situs tertentu. Setiap form yang dikirimkan oleh web kepada user, akan dikirimkan bersama CSRF Token sebagai proteksi dari serangan web berbahaya yang memimik behavior request.

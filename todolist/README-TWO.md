@@ -1,4 +1,5 @@
 # Week 6
+[Link Deploy](https://tugas-pbp-dhafin.herokuapp.com/todolist)
 
 ## Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
 Asynchronous programming adalah model pemrograman yang melakukan tugasnya banyak sekaligus secara paralel. Sedangkan, synchronous programming adalah model pemrograman yang mengharuskan program menyelesaikan suatu tugas terlebih dahulu baru melanjutkan ke tugas berikutnya. Asynchronous adalah arsitektur non-blocking, yang berarti tidak memblokir eksekusi lebih lanjut saat satu atau lebih operasi sedang berlangsung dan synchronous merupakan kebalikannya
