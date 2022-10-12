@@ -4,10 +4,89 @@
 <title>To Do List</title>
 {% endblock meta %}
 
-
-
 {% block content %}
 {% if user.is_authenticated %}
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+      const card = (data) =>  
+        `<div id="${data.pk}-card" class="rounded-3xl pl-10 pr-6 py-5 bg-gradient-to-br from-[#FDD023] to-[#E9B200] text-slate-100 hover:scale-105 transition duration-200 ease-in-out">
+          <div>
+            <span class="font-extrabold text-2xl text-black">
+              ${data.fields.title}
+            </span>
+          </div>
+          <div class="mb-10">
+            <p class="font-medium text-black">
+              ${data.fields.description}
+            </p>
+          </div>
+          <div class="mb-2">
+            <span>
+              ${data.fields.is_finished
+                ? '<p class="text-green-500 font-semibold">Status: Finished</p>'
+                : '<p class="text-red-500 font-semibold">Status: Not Finished</p>'
+              }
+            </span>
+          </div>
+          <div class="flex justify-between">
+            <div class="text-black">
+              ${data.fields.date}
+            </div>
+            <div>
+              <button class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 font-medium focus:ring-4 focus:ring-green-300 rounded-lg text-sm px-1 py-1 text-center dark:focus:ring-green-800"><a href="/todolist/update/${data.pk}">Update</a></button>
+              <button class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 font-medium focus:ring-4 focus:ring-red-300 rounded-lg text-sm px-1 py-1 text-center dark:focus:ring-red-800" onClick="deleteCard(${data.pk})">Delete</button>
+            </div>
+          </div>
+        </div>`
+      
+      const addCard = (data) => {
+        return $('#todolist').append(card(data))
+      }
+
+      $.get('/todolist/json', function (todolist) {
+        todolist.map((data) => {
+          addCard(data)
+        })
+      })
+
+      $(`#add-todolist`).click(function(){
+        if ($('#title').val() && $('#description').val()){
+          $.post('/todolist/add', {
+              title: $('#title').val(),
+              description: $('#description').val(),
+            },
+            function(res, status){
+              if(status == 'success'){
+                addCard(res)
+                $('#title').val('')
+                $('#description').val('')
+              }
+            },
+          )
+          return false
+        }
+      })
+
+      deleteCard = (idCard) => {
+        $.ajax({
+          url: `/todolist/delete/${idCard}`,
+          type: 'DELETE',
+          success: function(result) {
+            $(`#${idCard}-card`).remove()
+          }
+        });  
+    }
+
+
+      
+      
+  });
+  </script>
+</head>
+
 
 
 
@@ -27,43 +106,46 @@
 
 
 <div class="flex justify-center gap-10 text-white text-extrabold mt-7">
-  <button class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 font-medium focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800"><a href="{% url 'todolist:upload' %}">Tambah Task Baru</a></button>
+  <button  data-bs-toggle="modal" data-bs-target="#addModal" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 font-medium focus:ring-4 focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800" type="button" >Tambah Task Baru</button>
   <button class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 font-medium focus:ring-4 focus:ring-red-300 rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-red-800"><a href="{% url 'todolist:logout' %}">Logout</a></button>
 </div>
 
+<!-- Button trigger modal -->
 
-<div class="grid lg:grid-cols-4 md:grid-cols-2 gap-5 mt-8 sm:mt-5 px-4 py-4 ">
-  {% if todolist %} 
-  {% for task in todolist %} 
-  
-    <div class="rounded-3xl pl-10 pr-6 py-5 bg-gradient-to-br from-[#FDD023] to-[#E9B200] text-slate-100 hover:scale-105 transition duration-200 ease-in-out">
-     
-            <div class="font-extrabold text-2xl text-black">
-              {{task.title}}
-            </div>
-            <div class="mb-10 font-medium text-black">
-              {{task.description}}
-            </div>
-            <div class="mb-2">
-              
-              {% if task.is_finished %}
-                <p class="text-green-500 font-semibold">Status: Finished</p>
-              {% else %}
-                <p class="text-red-500 font-semibold">Status: Not Finished</p>
-              {% endif %}
-            </div>
-            <div class="flex justify-between">
-              <div class="text-black">
-                {{task.date}}
-              </div>
-              <div>
-                <button class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 font-medium focus:ring-4 focus:ring-green-300 rounded-lg text-sm px-1 py-1 text-center dark:focus:ring-green-800"><a href="{% url 'todolist:update' task.id%}">Update</a></button>
-                <button class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 font-medium focus:ring-4 focus:ring-red-300 rounded-lg text-sm px-1 py-1 text-center dark:focus:ring-red-800"><a href="{% url 'todolist:delete' task.id%}">Delete</a></button>
-              </div>
-            </div>
-        </div>
-        {% endfor %}
+<!-- Modal -->
+<div class="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" class="">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-gradient-to-br from-[#FDD023] to-[#E9B200] modal-dialog-centered">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-l font-extrabold" id="exampleModalLabel">ADD TODO</h1>
       </div>
+      <div class="modal-body w-full">
+        <form action="" method="post">
+          {% csrf_token %}
+            <div class="flex gap-10">
+                <div class="flex flex-col justify-around gap-2 w-full">
+                    <div class="flex flex-col text-sm font-medium block justify-around text-gray-200">
+                        <p class="text-black">Title:</p>
+                        <input type="text" name="title" id="title" class="form-control rounded-lg text-black" placeholder="Title" required>
+                    </div>
+                    <div class="flex flex-col text-sm font-medium block mb-2 justify-around text-gray-200">
+                        <p class="text-black">Description:</p>
+                        <input type="text" name="description" id="description" class="form-control rounded-lg text-black" placeholder="Description" required>
+                    </div>
+                    <div class="flex justify-center gap-2">
+                        <button type="submit" id="add-todolist" name="submit" value="Tambah" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Tambah</button> 
+                        <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
-{% endif %} {% endif %}  {% endblock content %}
+
+
+w
+<div class="grid lg:grid-cols-5 md:grid-cols-2 gap-5 mt-8 sm:mt-5 px-4 py-4" id="todolist"></div>
+
+{% endif %} {% endblock content %}

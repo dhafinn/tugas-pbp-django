@@ -1,13 +1,15 @@
 import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.core import serializers
 from django.urls import reverse
 from todolist.models import Task
 from todolist.forms import TaskUpload
+from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required(login_url='/todolist/login/')
@@ -84,4 +86,34 @@ def delete_data(request, id):
     todo.delete()
     return redirect('todolist:show_todolist')
 
- 
+@login_required(login_url='/todolist/login/')
+def show_json(request):
+    data = Task.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+def add_todolist(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        todolist = Task.objects.create(title=title, description=description,date=datetime.date.today(), is_finished=False, user=request.user)
+
+        result = {
+            'fields':{
+                'title':todolist.title,
+                'description':todolist.description,
+                'is_finished':todolist.is_finished,
+                'date':todolist.date,
+            },
+            'pk':todolist.pk
+        }
+
+        return JsonResponse(result)
+
+@login_required(login_url='/todolist/login/')
+@csrf_exempt
+def delete_ajax(request, id):
+    if request.method == "DELETE":
+        todo = get_object_or_404(Task, id = id)
+        todo.delete()
+    return HttpResponse(status=202)
