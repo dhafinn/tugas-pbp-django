@@ -88,7 +88,7 @@ def delete_data(request, id):
 
 @login_required(login_url='/todolist/login/')
 def show_json(request):
-    data = Task.objects.all()
+    data = Task.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 @csrf_exempt
